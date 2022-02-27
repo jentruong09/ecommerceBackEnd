@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
-  Product.findByPk({
+  Product.findOne({
     where: {
       id: req.params.id
     },
@@ -47,7 +47,7 @@ router.get('/:id', (req, res) => {
   ]
 }) .then(productData => {
   if(!productData) {
-    res.status(404).json({ message: 'No product found with this name!' });
+    res.status(404).json({ message: 'No product found with this id!' });
     return;
   } res.status(200).json(productData)
 }) .catch(err => {
@@ -138,7 +138,7 @@ router.delete('/:id', (req, res) => {
     }
   }) .then(productData => {
     if (!productData) {
-      res.status(404).json({ message: 'No product found with this name!' });
+      res.status(404).json({ message: 'No product found with this id!' });
       return;
     } res.status(200).json(productData)
   }) .catch(err => {
